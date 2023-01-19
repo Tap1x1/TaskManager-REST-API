@@ -1,0 +1,18 @@
+version: "3.10"
+
+
+services:
+  flask:
+    build: ./testtask
+    container_name: testtask
+    environment:
+      - FLASK_ENV=development
+
+    restart: on-failure
+
+    volumes:
+      - ./testtask:/string
+
+    ports:
+      - "5000:5000"
+    command: python main.py

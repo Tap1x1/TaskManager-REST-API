@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "8f501817-b21a-4728-8c3b-6761bc9cd2a5",
+		"name": "Test Task Postman",
+		"description": "This collection contains the requests for the section 01 code of the Advanced REST API Course.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24654229"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register a new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Alex\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"",
+									"pm.test(\"refresh token not empty\", function () {",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}",
+									"// set refresh token as environement variable",
+									"if (jsonData.refresh_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\" : \"Alex\",\n  \"password\" : \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "get task/name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/task/task1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"task",
+								"task1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post task/name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"tafgfdgfdsdfk1\",\n  \"user_assigment_task\": \"Alex\",\n  \"project_id\": 2,\n  \"status\": \"True\"\n    \n\n \n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/task/task3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"task",
+								"task3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete task by name",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/item/chair",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"chair"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post close-task/id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"tafgfdgfdsdfk1\",\n  \"user_assigment_task\": \"Alex\",\n  \"project_id\": 2,\n  \"status\": \"True\"\n    \n\n \n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/task/task3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"task",
+								"task3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project",
+			"item": [
+				{
+					"name": "create a new project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/project/Project2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"Project2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get project by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/Project1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"Project1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a new project by name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/project/Project1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"Project1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/projects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "post comment/name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"author\": \"Alex\",\n  \"text\": \"dfsdfsdfgfgdfffdgfdfffffffffffffgg\",\n  \"task_id\":\"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/task/comment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"task",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "file",
+			"item": [
+				{
+					"name": "upload file",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload",
+								"avatar"
+							]
+						},
+						"description": "Upload a user avatar. The avatar will be named in predefined format: `user_{id}.{ext}`."
+					},
+					"response": [
+						{
+							"name": "upload an avatar without providing image",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/upload/avatar",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"upload",
+										"avatar"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "82",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 May 2018 04:00:49 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.14.1 Python/3.6.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"image\": \"Please specify the image to upload.\"\n    }\n}\n"
+						},
+						{
+							"name": "upload an avatar",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/upload/avatar",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"upload",
+										"avatar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "49",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 May 2018 04:00:30 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.14.1 Python/3.6.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Avatar user_1.jpg uploaded!\"\n}\n"
+						}
+					]
+				},
+				{
+					"name": "get file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://172.17.0.3:5000/file/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"3"
+							],
+							"port": "5000",
+							"path": [
+								"file",
+								"1"
+							]
+						},
+						"description": "Retrieve a user avatar by user id."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

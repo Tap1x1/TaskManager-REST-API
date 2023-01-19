@@ -1,0 +1,32 @@
+{
+  "task_name_exists": "An task with name '{}' already exists.",
+  "task_error_inserting": "An error occurred while inserting the task.",
+  "task_not_found": "Task not found.",
+  "task_deleted": "Task deleted.",
+
+  "project_name_exists": "A project with name '{}' already exists.",
+  "project_error_inserting": "An error occurred while inserting the project.",
+  "project_not_found": "Project not found.",
+  "project_deleted": "Project deleted.",
+
+  "user_username_exists": "A user with that username already exists.",
+  "user_email_exists": "A user with that email already exists.",
+  "user_not_found": "User not found.",
+  "user_deleted": "User deleted.",
+  "user_invalid_credentials": "Invalid credentials!",
+  "user_logged_out": "User <id={}> successfully logged out.",
+  "user_not_confirmed": "You have not confirmed registration, please check your email <{}>.",
+  "user_error_creating": "Internal server error. Failed to create user.",
+  "user_registered": "Account created successfully.",
+
+
+  "file_illegal_extension": "Extension '{}' is not allowed.",
+  "file_illegal_file_name": "Illegal filename '{}' requested.",
+  "file_deleted": "File '{}' deleted.",
+  "file_delete_failed": "Internal server error! Failed to delete file.",
+  "file_uploaded": "File '{}' uploaded.",
+  "file_not_found": "File not found.",
+
+  "comment_authorized_user": "User is not authorized",
+  "comment_error_inserting": "An error occurred while inserting the comment."
+}

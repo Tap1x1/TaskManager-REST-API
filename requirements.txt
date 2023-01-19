@@ -1,0 +1,17 @@
+flask
+flask-jwt-extended
+flask-restful
+flask-sqlalchemy
+flask-marshmallow
+flask-migrate
+marshmallow
+marshmallow-sqlalchemy
+requests
+python-dotenv
+werkzeug==2.2.2
+flask-uploads
+flask-reuploaded
+psycopg2
+setuptools
+flask-bcrypt
+image
