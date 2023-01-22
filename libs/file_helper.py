@@ -4,7 +4,7 @@ from typing import Union
 from werkzeug.datastructures import FileStorage
 from flask_uploads import UploadSet, DEFAULTS
 
-FILE_SET = UploadSet("files", DEFAULTS)  # set name and allowed extensions
+FILE_SET = UploadSet("files", DEFAULTS) 
 
 
 def save_file(file: FileStorage, folder: str = None, name: str = None) -> str:
@@ -17,7 +17,7 @@ def get_path(filename: str = None, folder: str = None) -> str:
 
 def find_file_any_format(filename: str, folder: str) -> Union[str, None]:
 
-    for _format in DEFAULTS:  # look for existing avatar and delete it
+    for _format in DEFAULTS: 
         avatar = f"{filename}.{_format}"
         avatar_path = FILE_SET.path(filename=avatar, folder=folder)
         if os.path.isfile(avatar_path):
