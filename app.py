@@ -29,10 +29,9 @@ app.config.from_object("default_config")
 app.config.from_envvar("APPLICATION_SETTINGS")
 api = Api(app)
 jwt = JWTManager(app)
+db.init_app(app)
 
-
-@app.before_first_request
-def create_tables():
+with app.app_context():
     db.create_all()
 
 
@@ -55,6 +54,5 @@ api.add_resource(File, "/api/task/file/<int:user_id>")
 
 
 if __name__ == '__main__':
-    db.init_app(app)
     ma.init_app(app)
     app.run(host='0.0.0.0')
