@@ -1,5 +1,4 @@
 # Backend for project management system
-
 It is necessary to write a REST API that provides functionality for
 project management, tasking, etc.
 
