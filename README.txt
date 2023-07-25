@@ -1,4 +1,6 @@
- Backend for project management system
+## Backend for project management system
+
+
 It is necessary to write a REST API that provides functionality for
 project management, tasking, etc.
 
@@ -31,8 +33,8 @@ Task Model:
 	- project within which the task is created
 	- task creation date
 	- task closing date
-	- User who started the task
-	- User who started the task
+	- The user who started the task
+	- The user who was tasked
 	- list of files - (file uploading is done, displaying in the database is not done )
 	- comment list
 
